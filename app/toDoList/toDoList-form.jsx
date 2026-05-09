@@ -202,8 +202,6 @@ const tagColor = {
   身体障害者手帳: { bg: "#f3e5f5", color: "#6a1b9a", border: "#ce93d8" },
   精神保健福祉手帳: { bg: "#f3e5f5", color: "#6a1b9a", border: "#ce93d8" },
   療育手帳: { bg: "#f3e5f5", color: "#6a1b9a", border: "#ce93d8" },
-  必要: { bg: "#e8f5e9", color: "#2e7d32", border: "#81c784" },
-  不要: { bg: "#fce4ec", color: "#c62828", border: "#ef9a9a" },
 };
 
 function Tag({ val }) {
@@ -440,7 +438,7 @@ export default function OkuyamiApp() {
                           <div key={item.id} style={S.checkItem}>
                             <div style={{ fontSize: 14, color: "#333", lineHeight: 1.6 }}>{item.text}</div>
                             <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
-                              {["必要", "不要", "わからない"].map((opt) => (
+                              {["はい", "いいえ", "わからない"].map((opt) => (
                                 <label key={opt} style={S.radioBtn(sel === opt)}>
                                   <input type="radio" name={`c-${item.id}`} value={opt} checked={sel === opt} onChange={() => handleCheck(item.id, opt)} style={{ display: "none" }} />
                                   {opt}
