@@ -337,14 +337,14 @@ export default function OkuyamiApp() {
       border: `1px solid ${WOOD.border}`,
     }),
     radioBtn: (selected, opt) => {
-      const optColor = { はい: { bg: "#388e3c", border: "#2e7d32" }, いいえ: { bg: "#757575", border: "#616161" }, わからない: { bg: "#d32f2f", border: "#c62828" } };
+      const optColor = { はい: { bg: "#e8f5e9", border: "#81c784", text: "#2e7d32" }, いいえ: { bg: "#f5f5f5", border: "#bdbdbd", text: "#616161" }, わからない: { bg: "#fce4ec", border: "#ef9a9a", text: "#c62828" } };
       const c = (selected && optColor[opt]) ? optColor[opt] : null;
       return ({
       display: "flex", alignItems: "center", gap: 6,
       cursor: "pointer", padding: "7px 16px", borderRadius: 24,
       border: selected ? `2px solid ${c ? c.border : "#7a5230"}` : `1.5px solid #c4a06a`,
       background: selected ? (c ? c.bg : WOOD.light) : "rgba(255,255,255,0.6)",
-      color: selected ? "#fff" : "#5c3d2e",
+      color: selected ? (c ? c.text : "#fff") : "#5c3d2e",
       fontWeight: selected ? 700 : 400, fontSize: 14, transition: "all 0.15s",
       userSelect: "none",
       boxShadow: selected ? "0 2px 6px rgba(0,0,0,0.2)" : "inset 0 1px 3px rgba(0,0,0,0.05)",
