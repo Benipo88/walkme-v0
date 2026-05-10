@@ -467,10 +467,10 @@ export default function OkuyamiApp() {
                                 {sel === "わからない" && (
                                   <input
                                     type="text"
-                                    placeholder="何がわからないかを記載"
+                                    placeholder="内容を記載"
                                     value={checkOther[item.id] || ""}
                                     onChange={(e) => setCheckOther((prev) => ({ ...prev, [item.id]: e.target.value }))}
-                                    style={{ border: "1.5px solid #ccc", borderRadius: 6, padding: "6px 8px", fontSize: 13, outline: "none", width: 140, minWidth: 0 }}
+                                    style={{ border: "1.5px solid #ccc", borderRadius: 6, padding: "6px 6px", fontSize: 12, outline: "none", width: 110, minWidth: 0 }}
                                   />
                                 )}
                               </div>
