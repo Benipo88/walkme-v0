@@ -399,15 +399,14 @@ export default function OkuyamiApp() {
               確認シート
             </div>
             <div style={{ background: WOOD.card, border: `1px solid ${WOOD.border}`, borderRadius: 8, overflow: "hidden" }}>
-              {visibleQuestions.map((q, idx) => {
+              {(() => { let n = 0; return visibleQuestions.map((q) => {
                 const isChild = typeof q.id === "string";
+                if (!isChild) n++;
                 return (
                   <div key={q.id} style={{ padding: "8px 16px", paddingLeft: isChild ? 32 : 16, borderBottom: `1px solid ${WOOD.border}`, borderLeft: isChild ? `4px solid ${WOOD.indentBorder}` : "none", background: isChild ? "rgba(166,124,82,0.06)" : "transparent" }}>
-                    <div style={{ display: "flex", gap: 8, marginBottom: 5 }}>
-                      <div style={{ fontSize: 11, color: "#999", whiteSpace: "nowrap", paddingTop: 2 }}>{isChild ? "↳" : `Q${idx + 1}`}</div>
-                      <div style={{ fontSize: 14, fontWeight: 700, color: "#222", lineHeight: 1.5 }}>{q.text}</div>
-                    </div>
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
+                      <div style={{ fontSize: 11, color: "#999", whiteSpace: "nowrap" }}>{isChild ? "↳ 追加質問" : `Q${n}`}</div>
+                      <div style={{ fontSize: 14, fontWeight: 700, color: "#222", lineHeight: 1.5, flex: 1, minWidth: 120 }}>{q.text}</div>
                       {q.options.map((opt) => (
                         <label key={opt} style={S.radioBtn(answers[q.id] === opt)}>
                           <input type="radio" name={`q-${q.id}`} value={opt} checked={answers[q.id] === opt} onChange={() => handleAnswer(q.id, opt)} style={{ display: "none" }} />
@@ -417,7 +416,7 @@ export default function OkuyamiApp() {
                     </div>
                   </div>
                 );
-              })}
+              }); })()}
             </div>
             <div style={{ textAlign: "center", marginTop: 16 }}>
               <button style={S.primaryBtn} onClick={() => setPage("checklist")}>
@@ -453,11 +452,9 @@ export default function OkuyamiApp() {
                         const isLast = idx === cat.items.length - 1;
                         return (
                           <div key={item.id} style={{ padding: "6px 12px", borderBottom: isLast ? "none" : `1px solid #e8d5b7`, background: WOOD.card }}>
-                            <div style={{ display: "flex", gap: 8, marginBottom: 5 }}>
-                              <div style={{ fontSize: 11, color: "#999", whiteSpace: "nowrap", paddingTop: 2 }}>{`Q${idx + 1}`}</div>
-                              <div style={{ fontSize: 14, color: "#222", lineHeight: 1.5 }}>{item.text}</div>
-                            </div>
                             <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
+                              <div style={{ fontSize: 11, color: "#999", whiteSpace: "nowrap" }}>{`Q${idx + 1}`}</div>
+                              <div style={{ fontSize: 14, color: "#222", lineHeight: 1.5, flex: 1, minWidth: 120 }}>{item.text}</div>
                               {["はい", "いいえ", "わからない"].map((opt) => (
                                 <label key={opt} style={S.radioBtn(sel === opt)}>
                                   <input type="radio" name={`c-${item.id}`} value={opt} checked={sel === opt} onChange={() => handleCheck(item.id, opt)} style={{ display: "none" }} />
@@ -497,19 +494,18 @@ export default function OkuyamiApp() {
             <div style={{ background: "linear-gradient(135deg, #5c3d2e, #3d2517)", color: "#fff", padding: "8px 16px", fontWeight: 700, fontSize: 14 }}>
               確認シート　確認画面
             </div>
-            {visibleQuestions.map((q, idx) => {
+            {(() => { let n = 0; return visibleQuestions.map((q) => {
               const isChild = typeof q.id === "string";
+              if (!isChild) n++;
               const ans = answers[q.id];
               return (
-                <div key={q.id} style={{ display: "flex", gap: 8, padding: "6px 16px", paddingLeft: isChild ? 32 : 16, borderBottom: "1px solid #f0f0f0", background: ans === "いいえ" ? "#eeeeee" : isChild ? "#f9fbff" : "#fff" }}>
-                  <div style={{ minWidth: 28, color: "#999", fontSize: 11, paddingTop: 2 }}>{isChild ? "↳" : `Q${idx + 1}`}</div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: 13, color: "#555", marginBottom: 3, lineHeight: 1.5 }}>{q.text}</div>
-                    {ans ? <Tag val={ans} /> : <span style={{ color: "#ccc", fontSize: 12 }}>未回答</span>}
-                  </div>
+                <div key={q.id} style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center", padding: "6px 16px", paddingLeft: isChild ? 32 : 16, borderBottom: "1px solid #f0f0f0", background: ans === "いいえ" ? "#eeeeee" : isChild ? "#f9fbff" : "#fff" }}>
+                  <div style={{ color: "#999", fontSize: 11, whiteSpace: "nowrap" }}>{isChild ? "↳" : `Q${n}`}</div>
+                  <div style={{ fontSize: 13, color: "#555", lineHeight: 1.5, flex: 1, minWidth: 120 }}>{q.text}</div>
+                  {ans ? <Tag val={ans} /> : <span style={{ color: "#ccc", fontSize: 12 }}>未回答</span>}
                 </div>
               );
-            })}
+            }); })()}
           </div>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", marginTop: 16 }}>
             <button style={S.outlineBtn} onClick={() => setPage("checklist")}>← 入力に戻る</button>
@@ -537,16 +533,16 @@ export default function OkuyamiApp() {
                       const isLast = idx === cat.items.length - 1;
                       return (
                         <div key={item.id} style={{ padding: "5px 12px", borderBottom: isLast ? "none" : "1px solid #e8d5b7", background: sel === "いいえ" ? "#eeeeee" : "#fff" }}>
-                          <div style={{ display: "flex", gap: 8, marginBottom: 3 }}>
-                            <div style={{ fontSize: 11, color: "#999", whiteSpace: "nowrap", paddingTop: 2 }}>{`Q${idx + 1}`}</div>
-                            <div style={{ fontSize: 13, color: "#555", lineHeight: 1.5 }}>{item.text}</div>
+                          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
+                            <div style={{ fontSize: 11, color: "#999", whiteSpace: "nowrap" }}>{`Q${idx + 1}`}</div>
+                            <div style={{ fontSize: 13, color: "#555", lineHeight: 1.5, flex: 1, minWidth: 120 }}>{item.text}</div>
+                            {sel ? (
+                              <>
+                                <Tag val={sel} />
+                                {sel === "わからない" && other && <span style={{ fontSize: 12, color: "#777" }}>{other}</span>}
+                              </>
+                            ) : <span style={{ color: "#ccc", fontSize: 12 }}>未選択</span>}
                           </div>
-                          {sel ? (
-                            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                              <Tag val={sel} />
-                              {sel === "わからない" && other && <span style={{ fontSize: 12, color: "#777" }}>{other}</span>}
-                            </div>
-                          ) : <span style={{ color: "#ccc", fontSize: 12 }}>未選択</span>}
                         </div>
                       );
                     })}
