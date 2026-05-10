@@ -404,15 +404,19 @@ export default function OkuyamiApp() {
                 if (!isChild) n++;
                 return (
                   <div key={q.id} style={{ padding: "8px 16px", paddingLeft: isChild ? 32 : 16, borderBottom: `1px solid ${WOOD.border}`, borderLeft: isChild ? `4px solid ${WOOD.indentBorder}` : "none", background: answers[q.id] === "いいえ" ? "#eeeeee" : isChild ? "rgba(166,124,82,0.06)" : "transparent" }}>
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
-                      <div style={{ fontSize: 11, color: "#999", whiteSpace: "nowrap" }}>{isChild ? "↳ 追加質問" : `Q${n}`}</div>
-                      <div style={{ fontSize: 14, fontWeight: 700, color: "#222", lineHeight: 1.5, flex: 1, minWidth: 120 }}>{q.text}</div>
-                      {q.options.map((opt) => (
-                        <label key={opt} style={S.radioBtn(answers[q.id] === opt, opt)}>
-                          <input type="radio" name={`q-${q.id}`} value={opt} checked={answers[q.id] === opt} onChange={() => handleAnswer(q.id, opt)} style={{ display: "none" }} />
-                          {opt}
-                        </label>
-                      ))}
+                    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                      <div style={{ display: "flex", gap: 8, alignItems: "baseline" }}>
+                        <div style={{ fontSize: 11, color: "#999", whiteSpace: "nowrap" }}>{isChild ? "↳ 追加質問" : `Q${n}`}</div>
+                        <div style={{ fontSize: 14, fontWeight: 700, color: "#222", lineHeight: 1.5 }}>{q.text}</div>
+                      </div>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                        {q.options.map((opt) => (
+                          <label key={opt} style={S.radioBtn(answers[q.id] === opt, opt)}>
+                            <input type="radio" name={`q-${q.id}`} value={opt} checked={answers[q.id] === opt} onChange={() => handleAnswer(q.id, opt)} style={{ display: "none" }} />
+                            {opt}
+                          </label>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 );
@@ -448,24 +452,28 @@ export default function OkuyamiApp() {
                         const isLast = idx === cat.items.length - 1;
                         return (
                           <div key={item.id} style={{ padding: "6px 12px", borderBottom: isLast ? "none" : `1px solid #e8d5b7`, background: sel === "いいえ" ? "#eeeeee" : WOOD.card }}>
-                            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
-                              <div style={{ fontSize: 11, color: "#999", whiteSpace: "nowrap" }}>{`Q${idx + 1}`}</div>
-                              <div style={{ fontSize: 14, color: "#222", lineHeight: 1.5, flex: 1, minWidth: 120 }}>{item.text}</div>
-                              {["はい", "いいえ", "わからない"].map((opt) => (
-                                <label key={opt} style={S.radioBtn(sel === opt, opt)}>
-                                  <input type="radio" name={`c-${item.id}`} value={opt} checked={sel === opt} onChange={() => handleCheck(item.id, opt)} style={{ display: "none" }} />
-                                  {opt}
-                                </label>
-                              ))}
-                              {sel === "わからない" && (
-                                <input
-                                  type="text"
-                                  placeholder="何がわからないかを記載"
-                                  value={checkOther[item.id] || ""}
-                                  onChange={(e) => setCheckOther((prev) => ({ ...prev, [item.id]: e.target.value }))}
-                                  style={{ border: "1.5px solid #ccc", borderRadius: 6, padding: "6px 12px", fontSize: 13, outline: "none", minWidth: 180 }}
-                                />
-                              )}
+                            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                              <div style={{ display: "flex", gap: 8, alignItems: "baseline" }}>
+                                <div style={{ fontSize: 11, color: "#999", whiteSpace: "nowrap" }}>{`Q${idx + 1}`}</div>
+                                <div style={{ fontSize: 14, color: "#222", lineHeight: 1.5 }}>{item.text}</div>
+                              </div>
+                              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                                {["はい", "いいえ", "わからない"].map((opt) => (
+                                  <label key={opt} style={S.radioBtn(sel === opt, opt)}>
+                                    <input type="radio" name={`c-${item.id}`} value={opt} checked={sel === opt} onChange={() => handleCheck(item.id, opt)} style={{ display: "none" }} />
+                                    {opt}
+                                  </label>
+                                ))}
+                                {sel === "わからない" && (
+                                  <input
+                                    type="text"
+                                    placeholder="何がわからないかを記載"
+                                    value={checkOther[item.id] || ""}
+                                    onChange={(e) => setCheckOther((prev) => ({ ...prev, [item.id]: e.target.value }))}
+                                    style={{ border: "1.5px solid #ccc", borderRadius: 6, padding: "6px 12px", fontSize: 13, outline: "none", minWidth: 180 }}
+                                  />
+                                )}
+                              </div>
                             </div>
                           </div>
                         );
