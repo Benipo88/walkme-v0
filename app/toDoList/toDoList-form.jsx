@@ -314,12 +314,13 @@ export default function OkuyamiApp() {
   const S = {
     wrap: { minHeight: "100vh", background: WOOD.bg, fontFamily: "'Hiragino Kaku Gothic Pro','Meiryo',sans-serif" },
     header: { background: WOOD.header, color: "#fff", padding: "16px 24px", display: "flex", alignItems: "center", gap: 12, boxShadow: "0 2px 8px rgba(61,37,23,0.25)" },
-    tabBar: { display: "flex", borderBottom: `2px solid #c4a06a`, background: WOOD.tab },
+    tabBar: { display: "flex", gap: 8, padding: "8px 12px", background: WOOD.tab, borderBottom: `2px solid #c4a06a` },
     tabBtn: (active) => ({
-      padding: "12px 28px", cursor: "pointer", fontWeight: 700, fontSize: 14,
-      border: "none", background: "transparent",
-      borderBottom: active ? `3px solid #7a5230` : "3px solid transparent",
-      color: active ? "#5c3d2e" : "#a67c52", transition: "all 0.15s",
+      padding: "8px 24px", cursor: "pointer", fontWeight: 700, fontSize: 14,
+      border: "none", borderRadius: 30,
+      background: active ? WOOD.dark : WOOD.light,
+      color: "#fff", transition: "all 0.15s",
+      boxShadow: active ? "0 2px 8px rgba(61,37,23,0.35)" : "0 2px 6px rgba(122,82,48,0.25)",
     }),
     subTabBtn: () => ({
       padding: "6px 18px", cursor: "pointer", fontWeight: 700, fontSize: 13,
@@ -403,7 +404,7 @@ export default function OkuyamiApp() {
                 const isChild = typeof q.id === "string";
                 if (!isChild) n++;
                 return (
-                  <div key={q.id} style={{ padding: "8px 16px", paddingLeft: isChild ? 32 : 16, borderBottom: `1px solid ${WOOD.border}`, borderLeft: isChild ? `4px solid ${WOOD.indentBorder}` : "none", background: isChild ? "rgba(166,124,82,0.06)" : "transparent" }}>
+                  <div key={q.id} style={{ padding: "8px 16px", paddingLeft: isChild ? 32 : 16, borderBottom: `1px solid ${WOOD.border}`, borderLeft: isChild ? `4px solid ${WOOD.indentBorder}` : "none", background: answers[q.id] === "いいえ" ? "#eeeeee" : isChild ? "rgba(166,124,82,0.06)" : "transparent" }}>
                     <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
                       <div style={{ fontSize: 11, color: "#999", whiteSpace: "nowrap" }}>{isChild ? "↳ 追加質問" : `Q${n}`}</div>
                       <div style={{ fontSize: 14, fontWeight: 700, color: "#222", lineHeight: 1.5, flex: 1, minWidth: 120 }}>{q.text}</div>
@@ -451,7 +452,7 @@ export default function OkuyamiApp() {
                         const sel = checkAnswers[item.id];
                         const isLast = idx === cat.items.length - 1;
                         return (
-                          <div key={item.id} style={{ padding: "6px 12px", borderBottom: isLast ? "none" : `1px solid #e8d5b7`, background: WOOD.card }}>
+                          <div key={item.id} style={{ padding: "6px 12px", borderBottom: isLast ? "none" : `1px solid #e8d5b7`, background: sel === "いいえ" ? "#eeeeee" : WOOD.card }}>
                             <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
                               <div style={{ fontSize: 11, color: "#999", whiteSpace: "nowrap" }}>{`Q${idx + 1}`}</div>
                               <div style={{ fontSize: 14, color: "#222", lineHeight: 1.5, flex: 1, minWidth: 120 }}>{item.text}</div>
