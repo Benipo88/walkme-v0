@@ -392,13 +392,11 @@ export default function OkuyamiApp() {
       {/* ==================== 確認シート入力 ==================== */}
       {page === "sheet" && (
         <>
-          <div style={{ textAlign: "right", fontSize: 12, color: "#888", padding: "0 20px 4px" }}>
-            回答済み {answered} / {visibleQuestions.length} 問（{progress}%）
-          </div>
           <div style={{ maxWidth: 720, margin: "0 auto", padding: "4px 0px 80px" }}>
             <div style={{ border: `1px solid ${WOOD.border}`, borderRadius: 8, overflow: "hidden" }}>
-            <div style={{ background: "linear-gradient(135deg, #5c3d2e, #3d2517)", color: "#fff", padding: "8px 16px", fontWeight: 700, fontSize: 14 }}>
-              確認シート
+            <div style={{ background: "linear-gradient(135deg, #5c3d2e, #3d2517)", color: "#fff", padding: "8px 16px", fontWeight: 700, fontSize: 14, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <span>確認シート</span>
+              <span style={{ fontWeight: 400, fontSize: 12, opacity: 0.85 }}>回答済み {answered} / {visibleQuestions.length} 問（{progress}%）</span>
             </div>
             <div style={{ background: WOOD.card }}>
               {(() => { let n = 0; return visibleQuestions.map((q) => {
@@ -433,12 +431,10 @@ export default function OkuyamiApp() {
       {/* ==================== チェックリスト入力 ==================== */}
       {page === "checklist" && (
         <>
-          <div style={{ textAlign: "right", fontSize: 12, color: "#888", padding: "0 20px 4px" }}>
-            選択済み {answeredCheck} / {totalCheck} 項目（{checkProgress}%）
-          </div>
           <div style={{ maxWidth: 720, margin: "0 auto", padding: "4px 0px 80px" }}>
-            <div style={{ background: "linear-gradient(135deg, #5c3d2e, #3d2517)", color: "#fff", padding: "8px 16px", fontWeight: 700, fontSize: 14, marginBottom: 0 }}>
-              チェックリスト
+            <div style={{ background: "linear-gradient(135deg, #5c3d2e, #3d2517)", color: "#fff", padding: "8px 16px", fontWeight: 700, fontSize: 14, marginBottom: 0, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <span>チェックリスト</span>
+              <span style={{ fontWeight: 400, fontSize: 12, opacity: 0.85 }}>選択済み {answeredCheck} / {totalCheck} 項目（{checkProgress}%）</span>
             </div>
             {checklistSections.map((sec, secIdx) => (
               <div key={sec.section} style={{ marginBottom: secIdx < checklistSections.length - 1 ? 8 : 0 }}>
