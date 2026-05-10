@@ -483,7 +483,7 @@ export default function OkuyamiApp() {
               const isChild = typeof q.id === "string";
               const ans = answers[q.id];
               return (
-                <div key={q.id} style={{ display: "flex", gap: 12, padding: "12px 20px", paddingLeft: isChild ? 40 : 20, borderBottom: "1px solid #f0f0f0", background: isChild ? "#f9fbff" : "#fff" }}>
+                <div key={q.id} style={{ display: "flex", gap: 12, padding: "12px 20px", paddingLeft: isChild ? 40 : 20, borderBottom: "1px solid #f0f0f0", background: ans === "いいえ" ? "#eeeeee" : isChild ? "#f9fbff" : "#fff" }}>
                   <div style={{ minWidth: 30, color: "#999", fontSize: 12, paddingTop: 2 }}>{isChild ? "↳" : `Q${idx + 1}`}</div>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontSize: 13, color: "#555", marginBottom: 5, lineHeight: 1.5 }}>{q.text}</div>
@@ -505,7 +505,7 @@ export default function OkuyamiApp() {
                   const sel = checkAnswers[item.id];
                   const other = checkOther[item.id];
                   return (
-                    <div key={item.id} style={{ display: "flex", gap: 12, padding: "10px 20px", borderBottom: "1px solid #f0f0f0" }}>
+                    <div key={item.id} style={{ display: "flex", gap: 12, padding: "10px 20px", borderBottom: "1px solid #f0f0f0", background: sel === "いいえ" ? "#eeeeee" : undefined }}>
                       <div style={{ flex: 1 }}>
                         <div style={{ fontSize: 12, color: "#aaa", marginBottom: 3 }}>{sec.section} / {cat.title}</div>
                         <div style={{ fontSize: 13, color: "#555", marginBottom: 5, lineHeight: 1.5 }}>{item.text}</div>
