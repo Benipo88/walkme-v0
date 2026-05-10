@@ -516,7 +516,7 @@ export default function OkuyamiApp() {
                         const sel = checkAnswers[item.id];
                         const other = checkOther[item.id];
                         return (
-                          <div key={item.id} style={{ padding: "5px 10px", borderBottom: idx < cat.items.length - 1 ? "1px solid #f0f0f0" : "none", background: sel === "いいえ" ? "#eeeeee" : undefined }}>
+                          <div key={item.id} style={{ padding: "5px 10px", borderBottom: idx < cat.items.length - 1 ? "1px solid #f0f0f0" : "none", background: sel === "いいえ" ? "#eeeeee" : "#fff" }}>
                             <div style={{ fontSize: 13, color: "#555", marginBottom: 3, lineHeight: 1.5 }}>{item.text}</div>
                             {sel ? (
                               <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
