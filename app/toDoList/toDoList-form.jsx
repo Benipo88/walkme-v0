@@ -313,7 +313,7 @@ export default function OkuyamiApp() {
 
   const S = {
     wrap: { minHeight: "100vh", background: WOOD.bg, fontFamily: "'Hiragino Kaku Gothic Pro','Meiryo',sans-serif" },
-    header: { background: WOOD.header, color: "#fff", padding: "16px 24px", display: "flex", alignItems: "center", gap: 12, boxShadow: "0 2px 8px rgba(61,37,23,0.25)" },
+    header: { background: WOOD.header, color: "#fff", padding: "8px 24px", display: "flex", alignItems: "center", gap: 12, boxShadow: "0 2px 8px rgba(61,37,23,0.25)" },
     tabBar: { display: "flex", background: WOOD.tab },
     tabBtn: (active) => ({
       flex: 1, padding: "10px 0 7px", cursor: "pointer", fontWeight: 700, fontSize: 14,
