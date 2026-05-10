@@ -434,7 +434,7 @@ export default function OkuyamiApp() {
           </div>
           <div style={{ maxWidth: 720, margin: "0 auto", padding: "4px 0px 80px" }}>
             {checklistSections.map((sec, secIdx) => (
-              <div key={sec.section} style={{ marginBottom: secIdx < checklistSections.length - 1 ? 16 : 0 }}>
+              <div key={sec.section} style={{ marginBottom: secIdx < checklistSections.length - 1 ? 8 : 0 }}>
                 <div style={{ ...S.sectionHeader, borderRadius: "8px 8px 0 0", marginBottom: 0 }}>{sec.section}</div>
                 <div style={{ border: `1px solid ${WOOD.border}`, borderTop: "none", borderRadius: "0 0 8px 8px", overflow: "hidden" }}>
                   {sec.categories.map((cat) => (
