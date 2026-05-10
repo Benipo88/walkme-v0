@@ -226,12 +226,18 @@ export default function OkuyamiApp() {
   const [saveError, setSaveError] = useState("")
   const [loading, setLoading] = useState(true)
 
+  const migrateValues = (obj) => {
+    if (!obj) return obj
+    const map = { "必要": "はい", "不要": "いいえ" }
+    return Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, map[v] ?? v]))
+  }
+
   useEffect(() => {
     fetch('/api/save-toDoList', { cache: 'no-store' })
       .then(r => r.json())
       .then(data => {
-        if (data?.answers) setAnswers(data.answers)
-        if (data?.check_answers) setCheckAnswers(data.check_answers)
+        if (data?.answers) setAnswers(migrateValues(data.answers))
+        if (data?.check_answers) setCheckAnswers(migrateValues(data.check_answers))
         if (data?.check_other) setCheckOther(data.check_other)
       })
       .catch(() => {})
