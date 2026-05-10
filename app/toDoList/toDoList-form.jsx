@@ -336,16 +336,19 @@ export default function OkuyamiApp() {
       marginLeft: indent ? 20 : 0,
       border: `1px solid ${WOOD.border}`,
     }),
-    radioBtn: (selected) => ({
+    radioBtn: (selected, opt) => {
+      const optColor = { はい: { bg: "#388e3c", border: "#2e7d32" }, いいえ: { bg: "#757575", border: "#616161" }, わからない: { bg: "#d32f2f", border: "#c62828" } };
+      const c = (selected && optColor[opt]) ? optColor[opt] : null;
+      return ({
       display: "flex", alignItems: "center", gap: 6,
       cursor: "pointer", padding: "7px 16px", borderRadius: 24,
-      border: selected ? `2px solid #7a5230` : `1.5px solid #c4a06a`,
-      background: selected ? WOOD.light : "rgba(255,255,255,0.6)",
+      border: selected ? `2px solid ${c ? c.border : "#7a5230"}` : `1.5px solid #c4a06a`,
+      background: selected ? (c ? c.bg : WOOD.light) : "rgba(255,255,255,0.6)",
       color: selected ? "#fff" : "#5c3d2e",
       fontWeight: selected ? 700 : 400, fontSize: 14, transition: "all 0.15s",
       userSelect: "none",
-      boxShadow: selected ? "0 2px 6px rgba(122,82,48,0.3)" : "inset 0 1px 3px rgba(0,0,0,0.05)",
-    }),
+      boxShadow: selected ? "0 2px 6px rgba(0,0,0,0.2)" : "inset 0 1px 3px rgba(0,0,0,0.05)",
+    });},
     sectionHeader: { background: WOOD.section, color: "#fff", padding: "10px 18px", fontWeight: 700, fontSize: 15, borderRadius: "8px 8px 0 0", textShadow: "0 1px 2px rgba(0,0,0,0.3)" },
     categoryHeader: { background: WOOD.category, color: "#5c3d2e", padding: "8px 18px", fontWeight: 700, fontSize: 13, borderBottom: `1px solid ${WOOD.border}` },
     checkItem: { padding: "14px 18px", borderBottom: `1px solid #e8d5b7`, display: "flex", flexDirection: "column", gap: 10 },
@@ -409,7 +412,7 @@ export default function OkuyamiApp() {
                       <div style={{ fontSize: 11, color: "#999", whiteSpace: "nowrap" }}>{isChild ? "↳ 追加質問" : `Q${n}`}</div>
                       <div style={{ fontSize: 14, fontWeight: 700, color: "#222", lineHeight: 1.5, flex: 1, minWidth: 120 }}>{q.text}</div>
                       {q.options.map((opt) => (
-                        <label key={opt} style={S.radioBtn(answers[q.id] === opt)}>
+                        <label key={opt} style={S.radioBtn(answers[q.id] === opt, opt)}>
                           <input type="radio" name={`q-${q.id}`} value={opt} checked={answers[q.id] === opt} onChange={() => handleAnswer(q.id, opt)} style={{ display: "none" }} />
                           {opt}
                         </label>
@@ -457,7 +460,7 @@ export default function OkuyamiApp() {
                               <div style={{ fontSize: 11, color: "#999", whiteSpace: "nowrap" }}>{`Q${idx + 1}`}</div>
                               <div style={{ fontSize: 14, color: "#222", lineHeight: 1.5, flex: 1, minWidth: 120 }}>{item.text}</div>
                               {["はい", "いいえ", "わからない"].map((opt) => (
-                                <label key={opt} style={S.radioBtn(sel === opt)}>
+                                <label key={opt} style={S.radioBtn(sel === opt, opt)}>
                                   <input type="radio" name={`c-${item.id}`} value={opt} checked={sel === opt} onChange={() => handleCheck(item.id, opt)} style={{ display: "none" }} />
                                   {opt}
                                 </label>
