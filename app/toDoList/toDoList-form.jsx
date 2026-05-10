@@ -337,7 +337,7 @@ export default function OkuyamiApp() {
       border: `1px solid ${WOOD.border}`,
     }),
     radioBtn: (selected, opt) => {
-      const optColor = { はい: { bg: "#e8f5e9", border: "#81c784", text: "#2e7d32" }, いいえ: { bg: "#f5f5f5", border: "#bdbdbd", text: "#616161" }, わからない: { bg: "#fce4ec", border: "#ef9a9a", text: "#c62828" } };
+      const optColor = { はい: { bg: "#e8f5e9", border: "#81c784", text: "#2e7d32" }, いいえ: { bg: "#757575", border: "#616161", text: "#fff" }, わからない: { bg: "#fce4ec", border: "#ef9a9a", text: "#c62828" } };
       const c = (selected && optColor[opt]) ? optColor[opt] : null;
       return ({
       display: "flex", alignItems: "center", gap: 6,
@@ -409,7 +409,7 @@ export default function OkuyamiApp() {
                         <div style={{ fontSize: 11, color: "#999", whiteSpace: "nowrap" }}>{isChild ? "↳ 追加質問" : `Q${n}`}</div>
                         <div style={{ fontSize: 14, fontWeight: 700, color: "#222", lineHeight: 1.5 }}>{q.text}</div>
                       </div>
-                      <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
                         {q.options.map((opt) => (
                           <label key={opt} style={S.radioBtn(answers[q.id] === opt, opt)}>
                             <input type="radio" name={`q-${q.id}`} value={opt} checked={answers[q.id] === opt} onChange={() => handleAnswer(q.id, opt)} style={{ display: "none" }} />
@@ -457,7 +457,7 @@ export default function OkuyamiApp() {
                                 <div style={{ fontSize: 11, color: "#999", whiteSpace: "nowrap" }}>{`Q${idx + 1}`}</div>
                                 <div style={{ fontSize: 14, color: "#222", lineHeight: 1.5 }}>{item.text}</div>
                               </div>
-                              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                              <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
                                 {["はい", "いいえ", "わからない"].map((opt) => (
                                   <label key={opt} style={S.radioBtn(sel === opt, opt)}>
                                     <input type="radio" name={`c-${item.id}`} value={opt} checked={sel === opt} onChange={() => handleCheck(item.id, opt)} style={{ display: "none" }} />
