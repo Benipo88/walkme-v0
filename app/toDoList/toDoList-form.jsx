@@ -395,6 +395,9 @@ export default function OkuyamiApp() {
             回答済み {answered} / {visibleQuestions.length} 問（{progress}%）
           </div>
           <div style={{ maxWidth: 720, margin: "0 auto", padding: "4px 0px 80px" }}>
+            <div style={{ background: "linear-gradient(135deg, #5c3d2e, #3d2517)", color: "#fff", padding: "8px 16px", fontWeight: 700, fontSize: 14, marginBottom: 8 }}>
+              確認シート
+            </div>
             <div style={{ background: WOOD.card, border: `1px solid ${WOOD.border}`, borderRadius: 8, overflow: "hidden" }}>
               {visibleQuestions.map((q, idx) => {
                 const isChild = typeof q.id === "string";
@@ -433,6 +436,9 @@ export default function OkuyamiApp() {
             選択済み {answeredCheck} / {totalCheck} 項目（{checkProgress}%）
           </div>
           <div style={{ maxWidth: 720, margin: "0 auto", padding: "4px 0px 80px" }}>
+            <div style={{ background: "linear-gradient(135deg, #5c3d2e, #3d2517)", color: "#fff", padding: "8px 16px", fontWeight: 700, fontSize: 14, marginBottom: 8 }}>
+              チェックリスト
+            </div>
             {checklistSections.map((sec, secIdx) => (
               <div key={sec.section} style={{ marginBottom: secIdx < checklistSections.length - 1 ? 8 : 0 }}>
                 <div style={{ ...S.sectionHeader, borderRadius: "8px 8px 0 0", marginBottom: 0 }}>{sec.section}</div>
