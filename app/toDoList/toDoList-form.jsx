@@ -484,7 +484,7 @@ export default function OkuyamiApp() {
         <div style={{ maxWidth: 720, margin: "0 auto", padding: "4px 0px 80px" }}>
           <div style={{ background: "linear-gradient(135deg, #fdf6ee, #f5e9d6)", borderRadius: 10, boxShadow: "0 2px 8px rgba(122,82,48,0.12)", overflow: "hidden", marginBottom: 10, border: "1px solid #d4a96a" }}>
             <div style={{ background: "linear-gradient(135deg, #5c3d2e, #3d2517)", color: "#fff", padding: "8px 16px", fontWeight: 700, fontSize: 14 }}>
-              📋 確認シート 回答一覧
+              確認シート　確認画面
             </div>
             {visibleQuestions.map((q, idx) => {
               const isChild = typeof q.id === "string";
