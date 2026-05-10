@@ -314,13 +314,13 @@ export default function OkuyamiApp() {
   const S = {
     wrap: { minHeight: "100vh", background: WOOD.bg, fontFamily: "'Hiragino Kaku Gothic Pro','Meiryo',sans-serif" },
     header: { background: WOOD.header, color: "#fff", padding: "16px 24px", display: "flex", alignItems: "center", gap: 12, boxShadow: "0 2px 8px rgba(61,37,23,0.25)" },
-    tabBar: { display: "flex", gap: 8, padding: "8px 12px", background: WOOD.tab, borderBottom: `2px solid #c4a06a` },
+    tabBar: { display: "flex", background: WOOD.tab, borderBottom: `2px solid #c4a06a` },
     tabBtn: (active) => ({
-      padding: "8px 24px", cursor: "pointer", fontWeight: 700, fontSize: 14,
-      border: "none", borderRadius: 30,
+      flex: 1, padding: "10px 0", cursor: "pointer", fontWeight: 700, fontSize: 14,
+      border: "none", borderRadius: 0,
       background: active ? WOOD.dark : WOOD.light,
       color: "#fff", transition: "all 0.15s",
-      boxShadow: active ? "0 2px 8px rgba(61,37,23,0.35)" : "0 2px 6px rgba(122,82,48,0.25)",
+      boxShadow: active ? "inset 0 -2px 0 #3d2517" : "none",
     }),
     subTabBtn: () => ({
       padding: "6px 18px", cursor: "pointer", fontWeight: 700, fontSize: 13,
