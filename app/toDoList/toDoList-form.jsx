@@ -322,11 +322,11 @@ export default function OkuyamiApp() {
     }),
     card: (indent) => ({
       background: WOOD.card,
-      borderRadius: 10, marginBottom: 12,
-      padding: "16px 20px",
-      boxShadow: "0 2px 8px rgba(122,82,48,0.12), inset 0 1px 0 rgba(255,255,255,0.6)",
+      borderRadius: 6, marginBottom: 4,
+      padding: "8px 12px",
+      boxShadow: "0 1px 4px rgba(122,82,48,0.10)",
       borderLeft: indent ? `4px solid ${WOOD.indentBorder}` : `4px solid ${WOOD.mainBorder}`,
-      marginLeft: indent ? 24 : 0,
+      marginLeft: indent ? 20 : 0,
       border: `1px solid ${WOOD.border}`,
     }),
     radioBtn: (selected) => ({
@@ -388,13 +388,13 @@ export default function OkuyamiApp() {
           <div style={{ textAlign: "right", fontSize: 12, color: "#888", padding: "4px 20px" }}>
             回答済み {answered} / {visibleQuestions.length} 問（{progress}%）
           </div>
-          <div style={{ maxWidth: 720, margin: "0 auto", padding: "12px 16px 80px" }}>
+          <div style={{ maxWidth: 720, margin: "0 auto", padding: "6px 10px 80px" }}>
             {visibleQuestions.map((q, idx) => {
               const isChild = typeof q.id === "string";
               return (
                 <div key={q.id} style={S.card(isChild)}>
-                  <div style={{ fontSize: 11, color: "#999", marginBottom: 5 }}>{isChild ? "↳ 追加質問" : `問 ${idx + 1}`}</div>
-                  <div style={{ fontSize: 15, fontWeight: 700, color: "#222", marginBottom: 12, lineHeight: 1.6 }}>{q.text}</div>
+                  <div style={{ fontSize: 11, color: "#999", marginBottom: 2 }}>{isChild ? "↳ 追加質問" : `問 ${idx + 1}`}</div>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: "#222", marginBottom: 6, lineHeight: 1.5 }}>{q.text}</div>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                     {q.options.map((opt) => (
                       <label key={opt} style={S.radioBtn(answers[q.id] === opt)}>
@@ -424,19 +424,19 @@ export default function OkuyamiApp() {
           <div style={{ textAlign: "right", fontSize: 12, color: "#888", padding: "4px 20px" }}>
             選択済み {answeredCheck} / {totalCheck} 項目（{checkProgress}%）
           </div>
-          <div style={{ maxWidth: 720, margin: "0 auto", padding: "12px 16px 80px" }}>
+          <div style={{ maxWidth: 720, margin: "0 auto", padding: "6px 10px 80px" }}>
             {checklistSections.map((sec) => (
               <div key={sec.section}>
                 <div style={{ ...S.sectionHeader, borderRadius: 0, marginBottom: 0 }}>{sec.section}</div>
                 {sec.categories.map((cat, catIdx) => (
-                  <div key={cat.title} style={{ marginTop: 12 }}>
+                  <div key={cat.title} style={{ marginTop: 6 }}>
                     <div style={{ fontSize: 13, color: "#7a5230", background: "#e8d5b7", border: "1px solid #c4a06a", borderRadius: "6px 6px 0 0", padding: "5px 14px", fontWeight: 700 }}>{cat.title}</div>
                     <div style={{ background: WOOD.card, border: "1px solid #d4a96a", borderTop: "none", borderRadius: "0 0 6px 6px" }}>
                       {cat.items.map((item, idx) => {
                         const sel = checkAnswers[item.id];
                         return (
-                          <div key={item.id} style={{ padding: "10px 14px", borderBottom: idx < cat.items.length - 1 ? "1px solid #e8d5b7" : "none" }}>
-                            <div style={{ fontSize: 14, color: "#222", marginBottom: 8, lineHeight: 1.5 }}>{item.text}</div>
+                          <div key={item.id} style={{ padding: "6px 12px", borderBottom: idx < cat.items.length - 1 ? "1px solid #e8d5b7" : "none" }}>
+                            <div style={{ fontSize: 14, color: "#222", marginBottom: 5, lineHeight: 1.5 }}>{item.text}</div>
                             <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
                               {["はい", "いいえ", "わからない"].map((opt) => (
                                 <label key={opt} style={S.radioBtn(sel === opt)}>
@@ -472,21 +472,21 @@ export default function OkuyamiApp() {
 
       {/* ==================== 確認画面（両方まとめて表示） ==================== */}
       {page === "confirm" && (
-        <div style={{ maxWidth: 720, margin: "0 auto", padding: "16px 16px 80px" }}>
+        <div style={{ maxWidth: 720, margin: "0 auto", padding: "8px 10px 80px" }}>
 
           {/* 確認シート一覧 */}
-          <div style={{ background: "linear-gradient(135deg, #fdf6ee, #f5e9d6)", borderRadius: 10, boxShadow: "0 2px 8px rgba(122,82,48,0.12)", overflow: "hidden", marginBottom: 24, border: "1px solid #d4a96a" }}>
-            <div style={{ background: "linear-gradient(135deg, #5c3d2e, #3d2517)", color: "#fff", padding: "12px 20px", fontWeight: 700, fontSize: 15 }}>
+          <div style={{ background: "linear-gradient(135deg, #fdf6ee, #f5e9d6)", borderRadius: 10, boxShadow: "0 2px 8px rgba(122,82,48,0.12)", overflow: "hidden", marginBottom: 10, border: "1px solid #d4a96a" }}>
+            <div style={{ background: "linear-gradient(135deg, #5c3d2e, #3d2517)", color: "#fff", padding: "8px 16px", fontWeight: 700, fontSize: 14 }}>
               📋 確認シート 回答一覧
             </div>
             {visibleQuestions.map((q, idx) => {
               const isChild = typeof q.id === "string";
               const ans = answers[q.id];
               return (
-                <div key={q.id} style={{ display: "flex", gap: 12, padding: "12px 20px", paddingLeft: isChild ? 40 : 20, borderBottom: "1px solid #f0f0f0", background: ans === "いいえ" ? "#eeeeee" : isChild ? "#f9fbff" : "#fff" }}>
-                  <div style={{ minWidth: 30, color: "#999", fontSize: 12, paddingTop: 2 }}>{isChild ? "↳" : `Q${idx + 1}`}</div>
+                <div key={q.id} style={{ display: "flex", gap: 8, padding: "6px 16px", paddingLeft: isChild ? 32 : 16, borderBottom: "1px solid #f0f0f0", background: ans === "いいえ" ? "#eeeeee" : isChild ? "#f9fbff" : "#fff" }}>
+                  <div style={{ minWidth: 28, color: "#999", fontSize: 11, paddingTop: 2 }}>{isChild ? "↳" : `Q${idx + 1}`}</div>
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: 13, color: "#555", marginBottom: 5, lineHeight: 1.5 }}>{q.text}</div>
+                    <div style={{ fontSize: 13, color: "#555", marginBottom: 3, lineHeight: 1.5 }}>{q.text}</div>
                     {ans ? <Tag val={ans} /> : <span style={{ color: "#ccc", fontSize: 12 }}>未回答</span>}
                   </div>
                 </div>
@@ -495,23 +495,23 @@ export default function OkuyamiApp() {
           </div>
 
           {/* チェックリスト一覧 */}
-          <div style={{ background: "linear-gradient(135deg, #fdf6ee, #f5e9d6)", borderRadius: 10, boxShadow: "0 2px 8px rgba(122,82,48,0.12)", overflow: "hidden", marginBottom: 24, border: "1px solid #d4a96a" }}>
-            <div style={{ background: "linear-gradient(135deg, #5c3d2e, #3d2517)", color: "#fff", padding: "12px 20px", fontWeight: 700, fontSize: 15 }}>
+          <div style={{ background: "linear-gradient(135deg, #fdf6ee, #f5e9d6)", borderRadius: 10, boxShadow: "0 2px 8px rgba(122,82,48,0.12)", overflow: "hidden", marginBottom: 10, border: "1px solid #d4a96a" }}>
+            <div style={{ background: "linear-gradient(135deg, #5c3d2e, #3d2517)", color: "#fff", padding: "8px 16px", fontWeight: 700, fontSize: 14 }}>
               ✅ チェックリスト 選択一覧
             </div>
             {checklistSections.map((sec) => (
               <div key={sec.section}>
                 <div style={{ background: S.sectionHeader.background, color: "#fff", padding: "6px 20px", fontWeight: 700, fontSize: 13 }}>{sec.section}</div>
                 {sec.categories.map((cat) => (
-                  <div key={cat.title} style={{ marginTop: 8, marginLeft: 12, marginRight: 12 }}>
+                  <div key={cat.title} style={{ marginTop: 6, marginLeft: 8, marginRight: 8 }}>
                     <div style={{ fontSize: 12, color: "#7a5230", background: "#e8d5b7", border: "1px solid #c4a06a", borderRadius: "4px 4px 0 0", padding: "3px 12px", fontWeight: 700 }}>{cat.title}</div>
                     <div style={{ border: "1px solid #c4a06a", borderTop: "none", borderRadius: "0 0 4px 4px" }}>
                       {cat.items.map((item, idx) => {
                         const sel = checkAnswers[item.id];
                         const other = checkOther[item.id];
                         return (
-                          <div key={item.id} style={{ padding: "8px 12px", borderBottom: idx < cat.items.length - 1 ? "1px solid #f0f0f0" : "none", background: sel === "いいえ" ? "#eeeeee" : undefined }}>
-                            <div style={{ fontSize: 13, color: "#555", marginBottom: 4, lineHeight: 1.5 }}>{item.text}</div>
+                          <div key={item.id} style={{ padding: "5px 10px", borderBottom: idx < cat.items.length - 1 ? "1px solid #f0f0f0" : "none", background: sel === "いいえ" ? "#eeeeee" : undefined }}>
+                            <div style={{ fontSize: 13, color: "#555", marginBottom: 3, lineHeight: 1.5 }}>{item.text}</div>
                             {sel ? (
                               <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
                                 <Tag val={sel} />
