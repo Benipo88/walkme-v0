@@ -341,11 +341,11 @@ export default function OkuyamiApp() {
       const c = (selected && optColor[opt]) ? optColor[opt] : null;
       return ({
       display: "flex", alignItems: "center", gap: 6,
-      cursor: "pointer", padding: "7px 16px", borderRadius: 24,
+      cursor: "pointer", padding: "6px 10px", borderRadius: 24,
       border: selected ? `2px solid ${c ? c.border : "#7a5230"}` : `1.5px solid #c4a06a`,
       background: selected ? (c ? c.bg : WOOD.light) : "rgba(255,255,255,0.6)",
       color: selected ? (c ? c.text : "#fff") : "#5c3d2e",
-      fontWeight: selected ? 700 : 400, fontSize: 14, transition: "all 0.15s",
+      fontWeight: selected ? 700 : 400, fontSize: 15, transition: "all 0.15s",
       userSelect: "none",
       boxShadow: selected ? "0 2px 6px rgba(0,0,0,0.2)" : "inset 0 1px 3px rgba(0,0,0,0.05)",
     });},
