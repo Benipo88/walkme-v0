@@ -392,9 +392,6 @@ export default function OkuyamiApp() {
       {/* ==================== 確認シート入力 ==================== */}
       {page === "sheet" && (
         <>
-          <div style={{ background: "#e8d5b7", height: 5 }}>
-            <div style={{ height: 5, width: `${progress}%`, background: "linear-gradient(90deg, #a67c52, #c19a6b)", transition: "width 0.3s" }} />
-          </div>
           <div style={{ textAlign: "right", fontSize: 12, color: "#888", padding: "4px 20px" }}>
             回答済み {answered} / {visibleQuestions.length} 問（{progress}%）
           </div>
@@ -436,9 +433,6 @@ export default function OkuyamiApp() {
       {/* ==================== チェックリスト入力 ==================== */}
       {page === "checklist" && (
         <>
-          <div style={{ background: "#e8d5b7", height: 5 }}>
-            <div style={{ height: 5, width: `${checkProgress}%`, background: "linear-gradient(90deg, #a67c52, #c19a6b)", transition: "width 0.3s" }} />
-          </div>
           <div style={{ textAlign: "right", fontSize: 12, color: "#888", padding: "4px 20px" }}>
             選択済み {answeredCheck} / {totalCheck} 項目（{checkProgress}%）
           </div>
