@@ -510,6 +510,9 @@ export default function OkuyamiApp() {
       {/* ==================== 確認画面②：チェックリスト ==================== */}
       {page === "confirm2" && (
         <div style={{ maxWidth: 720, margin: "0 auto", padding: "4px 0px 80px" }}>
+          <div style={{ background: "linear-gradient(135deg, #5c3d2e, #3d2517)", color: "#fff", padding: "8px 16px", fontWeight: 700, fontSize: 14, marginBottom: 8 }}>
+            チェックリスト　確認画面
+          </div>
           {checklistSections.map((sec, secIdx) => (
             <div key={sec.section} style={{ marginBottom: secIdx < checklistSections.length - 1 ? 8 : 0 }}>
               <div style={{ ...S.sectionHeader, borderRadius: "8px 8px 0 0", marginBottom: 0 }}>{sec.section}</div>
