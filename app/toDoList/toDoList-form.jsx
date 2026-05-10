@@ -403,7 +403,7 @@ export default function OkuyamiApp() {
                 const isChild = typeof q.id === "string";
                 return (
                   <div key={q.id} style={{ padding: "10px 16px", paddingLeft: isChild ? 32 : 16, borderBottom: `1px solid ${WOOD.border}`, borderLeft: isChild ? `4px solid ${WOOD.indentBorder}` : "none", background: isChild ? "rgba(166,124,82,0.06)" : "transparent" }}>
-                    <div style={{ fontSize: 11, color: "#999", marginBottom: 2 }}>{isChild ? "↳ 追加質問" : `問 ${idx + 1}`}</div>
+                    <div style={{ fontSize: 11, color: "#999", marginBottom: 2 }}>{isChild ? "↳ 追加質問" : `Q${idx + 1}`}</div>
                     <div style={{ fontSize: 14, fontWeight: 700, color: "#222", marginBottom: 6, lineHeight: 1.5 }}>{q.text}</div>
                     <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                       {q.options.map((opt) => (
@@ -451,6 +451,7 @@ export default function OkuyamiApp() {
                         const isLast = idx === cat.items.length - 1;
                         return (
                           <div key={item.id} style={{ padding: "6px 12px", borderBottom: isLast ? "none" : `1px solid #e8d5b7`, background: WOOD.card }}>
+                            <div style={{ fontSize: 11, color: "#999", marginBottom: 2 }}>{`Q${idx + 1}`}</div>
                             <div style={{ fontSize: 14, color: "#222", marginBottom: 5, lineHeight: 1.5 }}>{item.text}</div>
                             <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
                               {["はい", "いいえ", "わからない"].map((opt) => (
@@ -532,6 +533,7 @@ export default function OkuyamiApp() {
                       const isLast = idx === cat.items.length - 1;
                       return (
                         <div key={item.id} style={{ padding: "5px 12px", borderBottom: isLast ? "none" : "1px solid #e8d5b7", background: sel === "いいえ" ? "#eeeeee" : "#fff" }}>
+                          <div style={{ fontSize: 11, color: "#999", marginBottom: 2 }}>{`Q${idx + 1}`}</div>
                           <div style={{ fontSize: 13, color: "#555", marginBottom: 3, lineHeight: 1.5 }}>{item.text}</div>
                           {sel ? (
                             <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
