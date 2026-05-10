@@ -299,7 +299,7 @@ export default function OkuyamiApp() {
     dark:  "linear-gradient(135deg, #5c3d2e 0%, #4a2f20 50%, #3d2517 100%)",
     bg:    "linear-gradient(160deg, #f5ede0 0%, #ede0cc 100%)",
     card:  "linear-gradient(135deg, #fdf6ee 0%, #f5e9d6 100%)",
-    header:"linear-gradient(135deg, #5c3d2e 0%, #4a2f20 60%, #3d2517 100%)",
+    header:"linear-gradient(135deg, #2d1a0e 0%, #1e0f07 60%, #120a04 100%)",
     tab:   "linear-gradient(180deg, #f5ede0 0%, #ede0cc 100%)",
     section:"linear-gradient(135deg, #7a5230 0%, #5c3d2e 100%)",
     category:"linear-gradient(135deg, #e8d5b7 0%, #ddc89f 100%)",
