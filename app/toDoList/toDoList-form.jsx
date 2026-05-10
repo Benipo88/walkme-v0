@@ -510,38 +510,34 @@ export default function OkuyamiApp() {
       {/* ==================== 確認画面②：チェックリスト ==================== */}
       {page === "confirm2" && (
         <div style={{ maxWidth: 720, margin: "0 auto", padding: "4px 0px 80px" }}>
-          <div style={{ background: "linear-gradient(135deg, #fdf6ee, #f5e9d6)", borderRadius: 10, boxShadow: "0 2px 8px rgba(122,82,48,0.12)", overflow: "hidden", marginBottom: 10, border: "1px solid #d4a96a" }}>
-            <div style={{ background: "linear-gradient(135deg, #5c3d2e, #3d2517)", color: "#fff", padding: "8px 16px", fontWeight: 700, fontSize: 14 }}>
-              ✅ チェックリスト 選択一覧
-            </div>
-            {checklistSections.map((sec) => (
-              <div key={sec.section}>
-                <div style={{ background: S.sectionHeader.background, color: "#fff", padding: "6px 20px", fontWeight: 700, fontSize: 13 }}>{sec.section}</div>
+          {checklistSections.map((sec, secIdx) => (
+            <div key={sec.section} style={{ marginBottom: secIdx < checklistSections.length - 1 ? 8 : 0 }}>
+              <div style={{ ...S.sectionHeader, borderRadius: "8px 8px 0 0", marginBottom: 0 }}>{sec.section}</div>
+              <div style={{ border: `1px solid ${WOOD.border}`, borderTop: "none", borderRadius: "0 0 8px 8px", overflow: "hidden" }}>
                 {sec.categories.map((cat) => (
-                  <div key={cat.title} style={{ marginTop: 6, marginLeft: 8, marginRight: 8 }}>
-                    <div style={{ fontSize: 12, color: "#7a5230", background: "#e8d5b7", border: "1px solid #c4a06a", borderRadius: "4px 4px 0 0", padding: "3px 12px", fontWeight: 700 }}>{cat.title}</div>
-                    <div style={{ border: "1px solid #c4a06a", borderTop: "none", borderRadius: "0 0 4px 4px" }}>
-                      {cat.items.map((item, idx) => {
-                        const sel = checkAnswers[item.id];
-                        const other = checkOther[item.id];
-                        return (
-                          <div key={item.id} style={{ padding: "5px 10px", borderBottom: idx < cat.items.length - 1 ? "1px solid #f0f0f0" : "none", background: sel === "いいえ" ? "#eeeeee" : "#fff" }}>
-                            <div style={{ fontSize: 13, color: "#555", marginBottom: 3, lineHeight: 1.5 }}>{item.text}</div>
-                            {sel ? (
-                              <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                                <Tag val={sel} />
-                                {sel === "わからない" && other && <span style={{ fontSize: 12, color: "#777" }}>{other}</span>}
-                              </div>
-                            ) : <span style={{ color: "#ccc", fontSize: 12 }}>未選択</span>}
-                          </div>
-                        );
-                      })}
-                    </div>
+                  <div key={cat.title}>
+                    <div style={{ fontSize: 13, color: "#7a5230", background: "#e8d5b7", borderBottom: `1px solid ${WOOD.border}`, borderTop: `1px solid ${WOOD.border}`, padding: "4px 14px", fontWeight: 700 }}>{cat.title}</div>
+                    {cat.items.map((item, idx) => {
+                      const sel = checkAnswers[item.id];
+                      const other = checkOther[item.id];
+                      const isLast = idx === cat.items.length - 1;
+                      return (
+                        <div key={item.id} style={{ padding: "5px 12px", borderBottom: isLast ? "none" : "1px solid #e8d5b7", background: sel === "いいえ" ? "#eeeeee" : "#fff" }}>
+                          <div style={{ fontSize: 13, color: "#555", marginBottom: 3, lineHeight: 1.5 }}>{item.text}</div>
+                          {sel ? (
+                            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                              <Tag val={sel} />
+                              {sel === "わからない" && other && <span style={{ fontSize: 12, color: "#777" }}>{other}</span>}
+                            </div>
+                          ) : <span style={{ color: "#ccc", fontSize: 12 }}>未選択</span>}
+                        </div>
+                      );
+                    })}
                   </div>
                 ))}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
           <div style={{ display: "flex", gap: 12, justifyContent: "center", marginTop: 16 }}>
             <button style={S.outlineBtn} onClick={() => setPage("confirm")}>← 確認シートの確認画面へ戻る</button>
             <button style={S.primaryBtn} onClick={handleSave} disabled={saving || saved}>
