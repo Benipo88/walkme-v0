@@ -426,8 +426,8 @@ export default function OkuyamiApp() {
           </div>
           <div style={{ maxWidth: 720, margin: "0 auto", padding: "12px 16px 80px" }}>
             {checklistSections.map((sec) => (
-              <div key={sec.section} style={{ marginBottom: 16 }}>
-                <div style={{ ...S.sectionHeader, borderRadius: "8px 8px 0 0", marginBottom: 0 }}>{sec.section}</div>
+              <div key={sec.section}>
+                <div style={{ ...S.sectionHeader, borderRadius: 0, marginBottom: 0 }}>{sec.section}</div>
                 {sec.categories.map((cat, catIdx) => (
                   <div key={cat.title} style={{ marginTop: 12 }}>
                     <div style={{ fontSize: 13, color: "#7a5230", background: "#e8d5b7", border: "1px solid #c4a06a", borderRadius: "6px 6px 0 0", padding: "5px 14px", fontWeight: 700 }}>{cat.title}</div>
@@ -500,7 +500,7 @@ export default function OkuyamiApp() {
               ✅ チェックリスト 選択一覧
             </div>
             {checklistSections.map((sec) => (
-              <div key={sec.section} style={{ marginBottom: 12 }}>
+              <div key={sec.section}>
                 <div style={{ background: S.sectionHeader.background, color: "#fff", padding: "6px 20px", fontWeight: 700, fontSize: 13 }}>{sec.section}</div>
                 {sec.categories.map((cat) => (
                   <div key={cat.title} style={{ marginTop: 8, marginLeft: 12, marginRight: 12 }}>
