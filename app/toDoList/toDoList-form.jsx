@@ -388,7 +388,7 @@ export default function OkuyamiApp() {
           <div style={{ textAlign: "right", fontSize: 12, color: "#888", padding: "4px 20px" }}>
             回答済み {answered} / {visibleQuestions.length} 問（{progress}%）
           </div>
-          <div style={{ maxWidth: 720, margin: "0 auto", padding: "6px 10px 80px" }}>
+          <div style={{ maxWidth: 720, margin: "0 auto", padding: "4px 0px 80px" }}>
             {visibleQuestions.map((q, idx) => {
               const isChild = typeof q.id === "string";
               return (
@@ -424,7 +424,7 @@ export default function OkuyamiApp() {
           <div style={{ textAlign: "right", fontSize: 12, color: "#888", padding: "4px 20px" }}>
             選択済み {answeredCheck} / {totalCheck} 項目（{checkProgress}%）
           </div>
-          <div style={{ maxWidth: 720, margin: "0 auto", padding: "6px 10px 80px" }}>
+          <div style={{ maxWidth: 720, margin: "0 auto", padding: "4px 0px 80px" }}>
             {checklistSections.map((sec) => (
               <div key={sec.section}>
                 <div style={{ ...S.sectionHeader, borderRadius: 0, marginBottom: 0 }}>{sec.section}</div>
@@ -472,7 +472,7 @@ export default function OkuyamiApp() {
 
       {/* ==================== 確認画面①：確認シート ==================== */}
       {page === "confirm" && (
-        <div style={{ maxWidth: 720, margin: "0 auto", padding: "8px 10px 80px" }}>
+        <div style={{ maxWidth: 720, margin: "0 auto", padding: "4px 0px 80px" }}>
           <div style={{ background: "linear-gradient(135deg, #fdf6ee, #f5e9d6)", borderRadius: 10, boxShadow: "0 2px 8px rgba(122,82,48,0.12)", overflow: "hidden", marginBottom: 10, border: "1px solid #d4a96a" }}>
             <div style={{ background: "linear-gradient(135deg, #5c3d2e, #3d2517)", color: "#fff", padding: "8px 16px", fontWeight: 700, fontSize: 14 }}>
               📋 確認シート 回答一覧
@@ -500,7 +500,7 @@ export default function OkuyamiApp() {
 
       {/* ==================== 確認画面②：チェックリスト ==================== */}
       {page === "confirm2" && (
-        <div style={{ maxWidth: 720, margin: "0 auto", padding: "8px 10px 80px" }}>
+        <div style={{ maxWidth: 720, margin: "0 auto", padding: "4px 0px 80px" }}>
           <div style={{ background: "linear-gradient(135deg, #fdf6ee, #f5e9d6)", borderRadius: 10, boxShadow: "0 2px 8px rgba(122,82,48,0.12)", overflow: "hidden", marginBottom: 10, border: "1px solid #d4a96a" }}>
             <div style={{ background: "linear-gradient(135deg, #5c3d2e, #3d2517)", color: "#fff", padding: "8px 16px", fontWeight: 700, fontSize: 14 }}>
               ✅ チェックリスト 選択一覧
@@ -534,7 +534,7 @@ export default function OkuyamiApp() {
             ))}
           </div>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", marginTop: 16 }}>
-            <button style={S.outlineBtn} onClick={() => setPage("confirm")}>← 確認シートに戻る</button>
+            <button style={S.outlineBtn} onClick={() => setPage("confirm")}>← 確認シートの確認画面へ戻る</button>
             <button style={S.primaryBtn} onClick={handleSave} disabled={saving || saved}>
               {saving ? "保存中..." : saved ? "✓ 保存済み" : "保存"}
             </button>
