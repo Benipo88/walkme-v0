@@ -194,8 +194,8 @@ function getAllQuestions(answers) {
 
 const tagColor = {
   はい: { bg: "#e8f5e9", color: "#2e7d32", border: "#81c784" },
-  いいえ: { bg: "#fce4ec", color: "#c62828", border: "#ef9a9a" },
-  わからない: { bg: "#f5f5f5", color: "#616161", border: "#bdbdbd" },
+  いいえ: { bg: "#f5f5f5", color: "#616161", border: "#bdbdbd" },
+  わからない: { bg: "#fce4ec", color: "#c62828", border: "#ef9a9a" },
   国民年金: { bg: "#e3f2fd", color: "#1565c0", border: "#90caf9" },
   厚生年金: { bg: "#e3f2fd", color: "#1565c0", border: "#90caf9" },
   その他: { bg: "#f5f5f5", color: "#616161", border: "#bdbdbd" },
