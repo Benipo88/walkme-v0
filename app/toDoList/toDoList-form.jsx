@@ -426,39 +426,37 @@ export default function OkuyamiApp() {
           </div>
           <div style={{ maxWidth: 720, margin: "0 auto", padding: "12px 16px 80px" }}>
             {checklistSections.map((sec) => (
-              <div key={sec.section} style={{ marginBottom: 24 }}>
-                <div style={S.sectionHeader}>{sec.section}</div>
-                <div style={{ background: "#fff", borderRadius: "0 0 10px 10px", boxShadow: "0 1px 4px rgba(0,0,0,0.07)", overflow: "hidden" }}>
-                  {sec.categories.map((cat) => (
-                    <div key={cat.title}>
-                      <div style={S.categoryHeader}>{cat.title}</div>
-                      {cat.items.map((item) => {
-                        const sel = checkAnswers[item.id];
-                        return (
-                          <div key={item.id} style={S.checkItem}>
-                            <div style={{ fontSize: 14, color: "#333", lineHeight: 1.6 }}>{item.text}</div>
-                            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
-                              {["はい", "いいえ", "わからない"].map((opt) => (
-                                <label key={opt} style={S.radioBtn(sel === opt)}>
-                                  <input type="radio" name={`c-${item.id}`} value={opt} checked={sel === opt} onChange={() => handleCheck(item.id, opt)} style={{ display: "none" }} />
-                                  {opt}
-                                </label>
-                              ))}
-                              {sel === "わからない" && (
-                                <input
-                                  type="text"
-                                  placeholder="何がわからないかを記載"
-                                  value={checkOther[item.id] || ""}
-                                  onChange={(e) => setCheckOther((prev) => ({ ...prev, [item.id]: e.target.value }))}
-                                  style={{ border: "1.5px solid #ccc", borderRadius: 6, padding: "6px 12px", fontSize: 13, outline: "none", minWidth: 180 }}
-                                />
-                              )}
-                            </div>
+              <div key={sec.section} style={{ marginBottom: 8 }}>
+                <div style={{ ...S.sectionHeader, borderRadius: 8, marginBottom: 4 }}>{sec.section}</div>
+                <div style={{ marginBottom: 16 }}>
+                  {sec.categories.map((cat) =>
+                    cat.items.map((item) => {
+                      const sel = checkAnswers[item.id];
+                      return (
+                        <div key={item.id} style={S.card(false)}>
+                          <div style={{ fontSize: 11, color: "#999", marginBottom: 5 }}>{cat.title}</div>
+                          <div style={{ fontSize: 15, fontWeight: 700, color: "#222", marginBottom: 12, lineHeight: 1.6 }}>{item.text}</div>
+                          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
+                            {["はい", "いいえ", "わからない"].map((opt) => (
+                              <label key={opt} style={S.radioBtn(sel === opt)}>
+                                <input type="radio" name={`c-${item.id}`} value={opt} checked={sel === opt} onChange={() => handleCheck(item.id, opt)} style={{ display: "none" }} />
+                                {opt}
+                              </label>
+                            ))}
+                            {sel === "わからない" && (
+                              <input
+                                type="text"
+                                placeholder="何がわからないかを記載"
+                                value={checkOther[item.id] || ""}
+                                onChange={(e) => setCheckOther((prev) => ({ ...prev, [item.id]: e.target.value }))}
+                                style={{ border: "1.5px solid #ccc", borderRadius: 6, padding: "6px 12px", fontSize: 13, outline: "none", minWidth: 180 }}
+                              />
+                            )}
                           </div>
-                        );
-                      })}
-                    </div>
-                  ))}
+                        </div>
+                      );
+                    })
+                  )}
                 </div>
               </div>
             ))}
