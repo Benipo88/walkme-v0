@@ -497,28 +497,33 @@ export default function OkuyamiApp() {
             <div style={{ background: "linear-gradient(135deg, #5c3d2e, #3d2517)", color: "#fff", padding: "12px 20px", fontWeight: 700, fontSize: 15 }}>
               ✅ チェックリスト 選択一覧
             </div>
-            {checklistSections.map((sec) =>
-              sec.categories.map((cat) =>
-                cat.items.map((item) => {
-                  const sel = checkAnswers[item.id];
-                  const other = checkOther[item.id];
-                  return (
-                    <div key={item.id} style={{ display: "flex", gap: 12, padding: "10px 20px", borderBottom: "1px solid #f0f0f0", background: sel === "いいえ" ? "#eeeeee" : undefined }}>
-                      <div style={{ flex: 1 }}>
-                        <div style={{ fontSize: 12, color: "#aaa", marginBottom: 3 }}>{sec.section} / {cat.title}</div>
-                        <div style={{ fontSize: 13, color: "#555", marginBottom: 5, lineHeight: 1.5 }}>{item.text}</div>
-                        {sel ? (
-                          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                            <Tag val={sel} />
-                            {sel === "わからない" && other && <span style={{ fontSize: 12, color: "#777" }}>{other}</span>}
+            {checklistSections.map((sec) => (
+              <div key={sec.section}>
+                <div style={{ background: S.sectionHeader.background, color: "#fff", padding: "8px 20px", fontWeight: 700, fontSize: 13 }}>{sec.section}</div>
+                {sec.categories.map((cat) => (
+                  <div key={cat.title}>
+                    <div style={{ fontSize: 12, color: "#7a5230", background: "#e8d5b7", border: "1px solid #c4a06a", borderRadius: 4, padding: "4px 14px", fontWeight: 700, margin: "8px 20px 4px" }}>{cat.title}</div>
+                    {cat.items.map((item) => {
+                      const sel = checkAnswers[item.id];
+                      const other = checkOther[item.id];
+                      return (
+                        <div key={item.id} style={{ display: "flex", gap: 12, padding: "10px 20px", borderBottom: "1px solid #f0f0f0", background: sel === "いいえ" ? "#eeeeee" : undefined }}>
+                          <div style={{ flex: 1 }}>
+                            <div style={{ fontSize: 13, color: "#555", marginBottom: 5, lineHeight: 1.5 }}>{item.text}</div>
+                            {sel ? (
+                              <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                                <Tag val={sel} />
+                                {sel === "わからない" && other && <span style={{ fontSize: 12, color: "#777" }}>{other}</span>}
+                              </div>
+                            ) : <span style={{ color: "#ccc", fontSize: 12 }}>未選択</span>}
                           </div>
-                        ) : <span style={{ color: "#ccc", fontSize: 12 }}>未選択</span>}
-                      </div>
-                    </div>
-                  );
-                })
-              )
-            )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
 
           <div style={{ display: "flex", gap: 12, justifyContent: "center", marginTop: 20 }}>
