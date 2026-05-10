@@ -392,7 +392,7 @@ export default function OkuyamiApp() {
       {/* ==================== 確認シート入力 ==================== */}
       {page === "sheet" && (
         <>
-          <div style={{ textAlign: "right", fontSize: 12, color: "#888", padding: "4px 20px" }}>
+          <div style={{ textAlign: "right", fontSize: 12, color: "#888", padding: "0 20px 4px" }}>
             回答済み {answered} / {visibleQuestions.length} 問（{progress}%）
           </div>
           <div style={{ maxWidth: 720, margin: "0 auto", padding: "4px 0px 80px" }}>
@@ -433,7 +433,7 @@ export default function OkuyamiApp() {
       {/* ==================== チェックリスト入力 ==================== */}
       {page === "checklist" && (
         <>
-          <div style={{ textAlign: "right", fontSize: 12, color: "#888", padding: "4px 20px" }}>
+          <div style={{ textAlign: "right", fontSize: 12, color: "#888", padding: "0 20px 4px" }}>
             選択済み {answeredCheck} / {totalCheck} 項目（{checkProgress}%）
           </div>
           <div style={{ maxWidth: 720, margin: "0 auto", padding: "4px 0px 80px" }}>
