@@ -395,24 +395,26 @@ export default function OkuyamiApp() {
             回答済み {answered} / {visibleQuestions.length} 問（{progress}%）
           </div>
           <div style={{ maxWidth: 720, margin: "0 auto", padding: "4px 0px 80px" }}>
-            {visibleQuestions.map((q, idx) => {
-              const isChild = typeof q.id === "string";
-              return (
-                <div key={q.id} style={S.card(isChild)}>
-                  <div style={{ fontSize: 11, color: "#999", marginBottom: 2 }}>{isChild ? "↳ 追加質問" : `問 ${idx + 1}`}</div>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: "#222", marginBottom: 6, lineHeight: 1.5 }}>{q.text}</div>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                    {q.options.map((opt) => (
-                      <label key={opt} style={S.radioBtn(answers[q.id] === opt)}>
-                        <input type="radio" name={`q-${q.id}`} value={opt} checked={answers[q.id] === opt} onChange={() => handleAnswer(q.id, opt)} style={{ display: "none" }} />
-                        {opt}
-                      </label>
-                    ))}
+            <div style={{ background: WOOD.card, border: `1px solid ${WOOD.border}`, borderRadius: 8, overflow: "hidden" }}>
+              {visibleQuestions.map((q, idx) => {
+                const isChild = typeof q.id === "string";
+                return (
+                  <div key={q.id} style={{ padding: "10px 16px", paddingLeft: isChild ? 32 : 16, borderBottom: `1px solid ${WOOD.border}`, borderLeft: isChild ? `4px solid ${WOOD.indentBorder}` : "none", background: isChild ? "rgba(166,124,82,0.06)" : "transparent" }}>
+                    <div style={{ fontSize: 11, color: "#999", marginBottom: 2 }}>{isChild ? "↳ 追加質問" : `問 ${idx + 1}`}</div>
+                    <div style={{ fontSize: 14, fontWeight: 700, color: "#222", marginBottom: 6, lineHeight: 1.5 }}>{q.text}</div>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                      {q.options.map((opt) => (
+                        <label key={opt} style={S.radioBtn(answers[q.id] === opt)}>
+                          <input type="radio" name={`q-${q.id}`} value={opt} checked={answers[q.id] === opt} onChange={() => handleAnswer(q.id, opt)} style={{ display: "none" }} />
+                          {opt}
+                        </label>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-            <div style={{ textAlign: "center", marginTop: 20 }}>
+                );
+              })}
+            </div>
+            <div style={{ textAlign: "center", marginTop: 16 }}>
               <button style={S.primaryBtn} onClick={() => setPage("checklist")}>
                 次へ：チェックリスト →
               </button>
