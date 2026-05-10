@@ -216,7 +216,7 @@ function Tag({ val }) {
 
 // ==================== メインコンポーネント ====================
 export default function OkuyamiApp() {
-  // page: "sheet" | "checklist" | "confirm"
+  // page: "sheet" | "checklist" | "confirm" | "confirm2"
   const [page, setPage] = useState("sheet");
   const [answers, setAnswers] = useState({});
   const [checkAnswers, setCheckAnswers] = useState({});
@@ -361,14 +361,14 @@ export default function OkuyamiApp() {
 
         </div>
         <div style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
-          {page === "confirm" && (
+          {(page === "confirm" || page === "confirm2") && (
             <button style={S.subTabBtn()} onClick={handlePrint}>🖨️ 印刷</button>
           )}
         </div>
       </div>
 
       {/* タブ（確認画面では非表示） */}
-      {page !== "confirm" && (
+      {page !== "confirm" && page !== "confirm2" && (
         <div style={S.tabBar}>
           <button style={S.tabBtn(page === "sheet")} onClick={() => setPage("sheet")}>
             確認シート
@@ -470,11 +470,9 @@ export default function OkuyamiApp() {
         </>
       )}
 
-      {/* ==================== 確認画面（両方まとめて表示） ==================== */}
+      {/* ==================== 確認画面①：確認シート ==================== */}
       {page === "confirm" && (
         <div style={{ maxWidth: 720, margin: "0 auto", padding: "8px 10px 80px" }}>
-
-          {/* 確認シート一覧 */}
           <div style={{ background: "linear-gradient(135deg, #fdf6ee, #f5e9d6)", borderRadius: 10, boxShadow: "0 2px 8px rgba(122,82,48,0.12)", overflow: "hidden", marginBottom: 10, border: "1px solid #d4a96a" }}>
             <div style={{ background: "linear-gradient(135deg, #5c3d2e, #3d2517)", color: "#fff", padding: "8px 16px", fontWeight: 700, fontSize: 14 }}>
               📋 確認シート 回答一覧
@@ -493,8 +491,16 @@ export default function OkuyamiApp() {
               );
             })}
           </div>
+          <div style={{ display: "flex", gap: 12, justifyContent: "center", marginTop: 16 }}>
+            <button style={S.outlineBtn} onClick={() => setPage("checklist")}>← 入力に戻る</button>
+            <button style={S.primaryBtn} onClick={() => setPage("confirm2")}>チェックリスト確認画面へ →</button>
+          </div>
+        </div>
+      )}
 
-          {/* チェックリスト一覧 */}
+      {/* ==================== 確認画面②：チェックリスト ==================== */}
+      {page === "confirm2" && (
+        <div style={{ maxWidth: 720, margin: "0 auto", padding: "8px 10px 80px" }}>
           <div style={{ background: "linear-gradient(135deg, #fdf6ee, #f5e9d6)", borderRadius: 10, boxShadow: "0 2px 8px rgba(122,82,48,0.12)", overflow: "hidden", marginBottom: 10, border: "1px solid #d4a96a" }}>
             <div style={{ background: "linear-gradient(135deg, #5c3d2e, #3d2517)", color: "#fff", padding: "8px 16px", fontWeight: 700, fontSize: 14 }}>
               ✅ チェックリスト 選択一覧
@@ -527,9 +533,8 @@ export default function OkuyamiApp() {
               </div>
             ))}
           </div>
-
-          <div style={{ display: "flex", gap: 12, justifyContent: "center", marginTop: 20 }}>
-            <button style={S.outlineBtn} onClick={() => setPage("checklist")}>← 入力に戻る</button>
+          <div style={{ display: "flex", gap: 12, justifyContent: "center", marginTop: 16 }}>
+            <button style={S.outlineBtn} onClick={() => setPage("confirm")}>← 確認シートに戻る</button>
             <button style={S.primaryBtn} onClick={handleSave} disabled={saving || saved}>
               {saving ? "保存中..." : saved ? "✓ 保存済み" : "保存"}
             </button>
@@ -537,7 +542,7 @@ export default function OkuyamiApp() {
           {saveError && (
             <div style={{ color: "#c62828", textAlign: "center", marginTop: 12, fontSize: 13 }}>{saveError}</div>
           )}
-          <div style={{ display: "flex", justifyContent: "center", marginTop: 16 }}>
+          <div style={{ display: "flex", justifyContent: "center", marginTop: 12 }}>
             <button style={S.outlineBtn} onClick={handlePrint}>🖨️ 印刷</button>
           </div>
         </div>
