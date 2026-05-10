@@ -433,17 +433,18 @@ export default function OkuyamiApp() {
             選択済み {answeredCheck} / {totalCheck} 項目（{checkProgress}%）
           </div>
           <div style={{ maxWidth: 720, margin: "0 auto", padding: "4px 0px 80px" }}>
-            {checklistSections.map((sec) => (
-              <div key={sec.section}>
-                <div style={{ ...S.sectionHeader, borderRadius: 0, marginBottom: 0 }}>{sec.section}</div>
-                {sec.categories.map((cat, catIdx) => (
-                  <div key={cat.title} style={{ marginTop: 6 }}>
-                    <div style={{ fontSize: 13, color: "#7a5230", background: "#e8d5b7", border: "1px solid #c4a06a", borderRadius: "6px 6px 0 0", padding: "5px 14px", fontWeight: 700 }}>{cat.title}</div>
-                    <div style={{ background: WOOD.card, border: "1px solid #d4a96a", borderTop: "none", borderRadius: "0 0 6px 6px" }}>
+            {checklistSections.map((sec, secIdx) => (
+              <div key={sec.section} style={{ marginBottom: secIdx < checklistSections.length - 1 ? 16 : 0 }}>
+                <div style={{ ...S.sectionHeader, borderRadius: "8px 8px 0 0", marginBottom: 0 }}>{sec.section}</div>
+                <div style={{ border: `1px solid ${WOOD.border}`, borderTop: "none", borderRadius: "0 0 8px 8px", overflow: "hidden" }}>
+                  {sec.categories.map((cat) => (
+                    <div key={cat.title}>
+                      <div style={{ fontSize: 13, color: "#7a5230", background: "#e8d5b7", borderBottom: `1px solid ${WOOD.border}`, borderTop: `1px solid ${WOOD.border}`, padding: "4px 14px", fontWeight: 700 }}>{cat.title}</div>
                       {cat.items.map((item, idx) => {
                         const sel = checkAnswers[item.id];
+                        const isLast = idx === cat.items.length - 1;
                         return (
-                          <div key={item.id} style={{ padding: "6px 12px", borderBottom: idx < cat.items.length - 1 ? "1px solid #e8d5b7" : "none" }}>
+                          <div key={item.id} style={{ padding: "6px 12px", borderBottom: isLast ? "none" : `1px solid #e8d5b7`, background: WOOD.card }}>
                             <div style={{ fontSize: 14, color: "#222", marginBottom: 5, lineHeight: 1.5 }}>{item.text}</div>
                             <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
                               {["はい", "いいえ", "わからない"].map((opt) => (
@@ -466,8 +467,8 @@ export default function OkuyamiApp() {
                         );
                       })}
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             ))}
             <div style={{ display: "flex", gap: 12, justifyContent: "center", marginTop: 20 }}>
