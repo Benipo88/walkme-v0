@@ -426,15 +426,15 @@ export default function OkuyamiApp() {
           </div>
           <div style={{ maxWidth: 720, margin: "0 auto", padding: "12px 16px 80px" }}>
             {checklistSections.map((sec) => (
-              <div key={sec.section} style={{ marginBottom: 8 }}>
-                <div style={{ ...S.sectionHeader, borderRadius: 8, marginBottom: 4 }}>{sec.section}</div>
-                <div style={{ marginBottom: 16 }}>
-                  {sec.categories.map((cat) =>
-                    cat.items.map((item) => {
+              <div key={sec.section} style={{ marginBottom: 16 }}>
+                <div style={{ ...S.sectionHeader, borderRadius: 8, marginBottom: 8 }}>{sec.section}</div>
+                {sec.categories.map((cat) => (
+                  <div key={cat.title} style={{ marginBottom: 16 }}>
+                    <div style={{ fontSize: 13, color: "#7a5230", background: "#e8d5b7", border: "1px solid #c4a06a", borderRadius: 6, padding: "6px 14px", fontWeight: 700, marginBottom: 6 }}>{cat.title}</div>
+                    {cat.items.map((item) => {
                       const sel = checkAnswers[item.id];
                       return (
                         <div key={item.id} style={S.card(false)}>
-                          <div style={{ display: "inline-block", fontSize: 11, color: "#7a5230", background: "#e8d5b7", border: "1px solid #c4a06a", borderRadius: 4, padding: "2px 10px", marginBottom: 8, fontWeight: 700 }}>{cat.title}</div>
                           <div style={{ fontSize: 15, fontWeight: 700, color: "#222", marginBottom: 12, lineHeight: 1.6 }}>{item.text}</div>
                           <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
                             {["はい", "いいえ", "わからない"].map((opt) => (
@@ -455,9 +455,9 @@ export default function OkuyamiApp() {
                           </div>
                         </div>
                       );
-                    })
-                  )}
-                </div>
+                    })}
+                  </div>
+                ))}
               </div>
             ))}
             <div style={{ display: "flex", gap: 12, justifyContent: "center", marginTop: 20 }}>
