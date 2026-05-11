@@ -225,6 +225,35 @@ export default function OkuyamiApp() {
   const [saved, setSaved] = useState(false)
   const [saveError, setSaveError] = useState("")
   const [loading, setLoading] = useState(true)
+  const [authed, setAuthed] = useState(false)
+  const [pw, setPw] = useState("")
+  const [pwError, setPwError] = useState(false)
+  const [pwLoading, setPwLoading] = useState(false)
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && sessionStorage.getItem("authed") === "1") {
+      setAuthed(true)
+    }
+  }, [])
+
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    setPwLoading(true)
+    setPwError(false)
+    try {
+      const res = await fetch("/api/auth", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password: pw }) })
+      if (res.ok) {
+        sessionStorage.setItem("authed", "1")
+        setAuthed(true)
+      } else {
+        setPwError(true)
+      }
+    } catch {
+      setPwError(true)
+    } finally {
+      setPwLoading(false)
+    }
+  }
 
   const migrateValues = (obj) => {
     if (!obj) return obj
@@ -359,6 +388,34 @@ export default function OkuyamiApp() {
   if (loading) return (
     <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "linear-gradient(160deg, #f5ede0 0%, #ede0cc 100%)", fontFamily: "'Hiragino Kaku Gothic Pro','Meiryo',sans-serif", color: "#7a5230", fontSize: 16 }}>
       読み込み中...
+    </div>
+  )
+
+  if (!authed) return (
+    <div style={{ minHeight: "100vh", background: "linear-gradient(160deg, #f5ede0 0%, #ede0cc 100%)", fontFamily: "'Hiragino Kaku Gothic Pro','Meiryo',sans-serif", display: "flex", flexDirection: "column" }}>
+      <div style={{ background: "linear-gradient(135deg, #2d1a0e 0%, #1e0f07 60%, #120a04 100%)", color: "#fff", padding: "6px 16px", fontWeight: 900, fontSize: 15, letterSpacing: 2 }}>
+        おくやみ手続き
+      </div>
+      <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+        <div style={{ background: "#fff", borderRadius: 12, boxShadow: "0 4px 20px rgba(61,37,23,0.15)", padding: "32px 28px", width: "100%", maxWidth: 360 }}>
+          <div style={{ textAlign: "center", fontSize: 18, fontWeight: 900, color: "#3d2517", marginBottom: 8 }}>ログイン</div>
+          <div style={{ textAlign: "center", fontSize: 13, color: "#888", marginBottom: 24 }}>パスワードを入力してください</div>
+          <form onSubmit={handleLogin}>
+            <input
+              type="password"
+              value={pw}
+              onChange={(e) => { setPw(e.target.value); setPwError(false) }}
+              placeholder="パスワード"
+              style={{ width: "100%", boxSizing: "border-box", border: pwError ? "2px solid #e53935" : "1.5px solid #d4a96a", borderRadius: 8, padding: "12px 14px", fontSize: 16, outline: "none", marginBottom: 8, color: "#3d2517" }}
+              autoFocus
+            />
+            {pwError && <div style={{ color: "#e53935", fontSize: 13, marginBottom: 8 }}>パスワードが正しくありません</div>}
+            <button type="submit" disabled={pwLoading || !pw} style={{ width: "100%", background: "linear-gradient(135deg, #5c3d2e 0%, #3d2517 100%)", color: "#fff", border: "none", borderRadius: 8, padding: "12px", fontSize: 16, fontWeight: 700, cursor: pw ? "pointer" : "not-allowed", opacity: pw ? 1 : 0.6, marginTop: 4 }}>
+              {pwLoading ? "確認中..." : "ログイン"}
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   )
 
